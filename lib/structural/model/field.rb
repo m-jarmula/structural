@@ -1,9 +1,11 @@
 module Structural
   module Model
     class Field
+      include IvarName
+
       def initialize(model, name, options)
         @model = model
-        @name = name
+        @name = name.to_s
         @options = options
       end
 
@@ -34,7 +36,7 @@ module Structural
       end
 
       def ivar_name
-        @ivar_name ||= "@#{@name}"
+        @ivar_name ||= "@#{safe_name}"
       end
 
       def default_value
